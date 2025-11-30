@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class HitungGajiKaryawan {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Array gaji pokok sesuai golongan
+        int[] gajiPokok = {5000000, 6500000, 9500000};
+
+        // Array persen lembur (dalam bentuk desimal)
+        double[] persenLembur = {0.30, 0.32, 0.34, 0.36, 0.38};
+
+        // Input golongan karyawan
+        System.out.print("Masukkan Golongan (A/B/C): ");
+        String gol = input.next().toUpperCase();
+
+        // Input jam lembur
+        System.out.print("Masukkan Jumlah Jam Lembur: ");
+        int jam = input.nextInt();
+
+        int indexGaji = 0; // untuk mengambil gaji dari array
+        double gajiLembur = 0;
+        double totalGaji = 0;
+
+        // Menentukan index array berdasarkan golongan
+        if (gol.equals("A")) {
+            indexGaji = 0;
+        } else if (gol.equals("B")) {
+            indexGaji = 1;
+        } else if (gol.equals("C")) {
+            indexGaji = 2;
+        } else {
+            System.out.println("Golongan tidak dikenal!");
+            return;
+        }
+
+        // Hitung gaji lembur menggunakan array persen lembur
+        if (jam == 1) {
+            gajiLembur = gajiPokok[indexGaji] * persenLembur[0];
+        } else if (jam == 2) {
+            gajiLembur = gajiPokok[indexGaji] * persenLembur[1];
+        } else if (jam == 3) {
+            gajiLembur = gajiPokok[indexGaji] * persenLembur[2];
+        } else if (jam == 4) {
+            gajiLembur = gajiPokok[indexGaji] * persenLembur[3];
+        } else if (jam >= 5) {
+            gajiLembur = gajiPokok[indexGaji] * persenLembur[4];
+        } else {
+            gajiLembur = 0;
+        }
+
+        // Hitung total gaji
+        totalGaji = gajiPokok[indexGaji] + gajiLembur;
+
+        // Output hasil
+        System.out.println("\n=== HASIL PERHITUNGAN GAJI ===");
+        System.out.println("Golongan        : " + gol);
+        System.out.println("Gaji Pokok      : Rp " + gajiPokok[indexGaji]);
+        System.out.println("Gaji Lembur     : Rp " + (int) gajiLembur);
+        System.out.println("Total Gaji      : Rp " + (int) totalGaji);
+        
+        input.close();
+    }
+}
